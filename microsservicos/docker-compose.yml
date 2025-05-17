@@ -1,0 +1,59 @@
+
+
+services:
+  paciente:
+    build: ./paciente
+    ports:
+      - "5001:5001"
+    environment:
+      - FLASK_DEBUG=1
+    networks:
+      - saude-network
+
+  consulta:
+    build: ./consulta
+    ports:
+      - "5003:5003"
+    environment:
+      - FLASK_DEBUG=1
+    depends_on:
+      - paciente
+    networks:
+      - saude-network
+
+  prontuario:
+    build: ./prontuario
+    ports:
+      - "5002:5002"
+    environment:
+      - FLASK_DEBUG=1
+    depends_on:
+      - paciente
+      - consulta
+    networks:
+      - saude-network
+
+  plano_saude:
+    build: ./plano_saude
+    ports:
+      - "5005:5005"
+    environment:
+      - FLASK_DEBUG=1
+    networks:
+      - saude-network
+
+  faturamento:
+    build: ./faturamento
+    ports:
+      - "5004:5004"
+    environment:
+      - FLASK_DEBUG=1
+    depends_on:
+      - consulta
+      - plano_saude
+    networks:
+      - saude-network
+
+networks:
+  saude-network:
+    driver: bridge
