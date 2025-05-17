@@ -1,6 +1,7 @@
 Visão Geral
 
 Este projeto implementa uma arquitetura de microsserviços para o sistema de clínicas Vida+ Saúde, substituindo a abordagem monolítica anterior. O sistema é composto por serviços independentes que se comunicam via APIs RESTful, permitindo melhor escalabilidade e manutenibilidade. </br>
+</br>
 Serviços Implementados:
 
 1. Paciente (:5001)
